@@ -6,37 +6,38 @@
 
 import random
 
+
 def randomize_prizes():
     """ Creates a dictionary with 3 values assigned with booleans
     to randomise the prizes behind each door"""
-   
+
     car = True
     goat_1 = False
     goat_2 = False
     prize_list = [car, goat_1, goat_2]
-    
+
     # shuffle list to ensure random outcome
     random.shuffle(prize_list)
-    
+
     set_doors = {1: prize_list[0], 2: prize_list[1], 3: prize_list[2]}
 
     return set_doors
 
 
 def stay():
-    """Monty Hall problem when the player chooses to stick with the same door"""
+    """Monty Hall problem when player chooses to stick with the same door"""
 
     set_doors = randomize_prizes()
-    
+
     choice_list = [1, 2, 3]
     choice = random.randint(1, 3)
-    
+
     choice_list.remove(choice)  # So Monty can remove a door with a goat
-    
+
     # Take away a door
     print("The door you have chosen is: {}".format(choice))
-    
-    if set_doors[choice_list[0]] == False:
+
+    if set_doors[choice_list[0]] is False:
         print("Door {} has a goat".format(choice_list[0]))
         print("Your choice is still Door {}".format(choice))
 
@@ -45,9 +46,9 @@ def stay():
         print("Your choice is still Door {}".format(choice))
 
     # Check what prize has been won
-    if set_doors[choice] == True:
+    if set_doors[choice] is True:
         return True
-    
+
     else:
         return False
 
@@ -62,23 +63,25 @@ def switch():
 
     choice_list.remove(choice)  # So Monty can remove a door with a goat
 
-    # Take away a door 
+    # Take away a door
     print("The door you have chosen is: {}".format(choice))
 
-    if set_doors[choice_list[0]] == False:
+    if set_doors[choice_list[0]] is False:
         print("Door {} has a goat".format(choice_list[0]))
         choice = choice_list[1]
-        print("Your choice has been switched to door {}".format(choice_list[1]))
+        print("Your choice has been switched to door {}"
+              .format(choice_list[1]))
 
-    else: 
+    else:
         print("Door {} has a goat".format(choice_list[1]))
         choice = choice_list[0]
-        print("Your choice has been switched to door {}".format(choice_list[0]))
+        print("Your choice has been switched to door {}"
+              .format(choice_list[0]))
 
     # Check what prize has been won
-    if set_doors[choice] == True:
+    if set_doors[choice] is True:
         return True
-        
+
     else:
         return False
 
@@ -86,7 +89,7 @@ def switch():
 def switch_or_stay():
     """Pick whether to calculate percentage of wins for either switching
     doors or sticking with your original choice"""
-    
+
     win_count = []
 
     switch_or_stay = input("Switch doors or stay? ").strip().lower()
@@ -95,7 +98,7 @@ def switch_or_stay():
         for i in range(10):
             prize = stay()
 
-            if prize == True:
+            if prize is True:
                 print("Congrats on your new car!")
                 win_count.append("car")
 
@@ -107,7 +110,7 @@ def switch_or_stay():
         for i in range(10):
             prize = switch()
 
-            if prize == True:
+            if prize is True:
                 print("Congrats on your new car!")
                 win_count.append("car")
 
@@ -144,4 +147,3 @@ def main():
 
 
 main()
-        
